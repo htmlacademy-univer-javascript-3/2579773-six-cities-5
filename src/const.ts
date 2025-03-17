@@ -1,5 +1,5 @@
 const CardsInfo = {
-  PlacesCount: 10
+  PlacesCount: 5
 };
 
 export {CardsInfo};
