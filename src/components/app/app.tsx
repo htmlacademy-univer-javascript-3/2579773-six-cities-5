@@ -11,7 +11,6 @@ type AppScreenProps = {
 }
 
 const App = ({placesCount}: AppScreenProps): JSX.Element => (
-  // <MainPage placesCount={placesCount}/>
   <BrowserRouter>
     <Routes>
       <Route
