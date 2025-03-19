@@ -2,12 +2,16 @@ const CardsInfo = {
   PlacesCount: 5
 };
 
-
-export enum AppRoute {
+const enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id'
 }
 
-export {CardsInfo};
+const enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH'
+}
+
+export {CardsInfo, AppRoute, AuthorizationStatus};
