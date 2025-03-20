@@ -11,9 +11,7 @@ const PrivateRoute = (props: PrivateRouteProps): JSX.Element => {
   const {authorizationStatus, children} = props;
 
   return (
-    authorizationStatus === true
-      ? children
-      : <Navigate to={AppRoute.Login} />
+    authorizationStatus ? children : <Navigate to={AppRoute.Login} />
   );
 };
 
