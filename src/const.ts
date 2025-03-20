@@ -9,9 +9,4 @@ const enum AppRoute {
   Offer = '/offer/:id'
 }
 
-const enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH'
-}
-
-export {CardsInfo, AppRoute, AuthorizationStatus};
+export {CardsInfo, AppRoute};
