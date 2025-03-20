@@ -2,4 +2,11 @@ const CardsInfo = {
   PlacesCount: 5
 };
 
-export {CardsInfo};
+const enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id'
+}
+
+export {CardsInfo, AppRoute};
