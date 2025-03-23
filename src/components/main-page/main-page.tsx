@@ -1,6 +1,6 @@
-import Card from '../card/card';
 import Logo from '../logo/logo';
 import { OfferPreviewType } from '../../types/offer-preview';
+import OfferList from '../offer-list/offer-list';
 
 type MainPageProps = {
   offers: OfferPreviewType[];
@@ -91,11 +91,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => (
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {offers.map((offer) => (
-                <Card key={offer.id} offer={offer} block="cities"/>
-              ))}
-            </div>
+            <OfferList offers={offers}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>

@@ -1,0 +1,16 @@
+import Card from '../card/card';
+import { OfferPreviewType } from '../../types/offer-preview';
+
+type OfferListProps = {
+  offers: OfferPreviewType[];
+}
+
+const OfferList = ({offers}: OfferListProps): JSX.Element => (
+  <div className="cities__places-list places__list tabs__content">
+    {offers.map((offer) => (
+      <Card key={offer.id} offer={offer} block="cities"/>
+    ))}
+  </div>
+);
+
+export default OfferList;
