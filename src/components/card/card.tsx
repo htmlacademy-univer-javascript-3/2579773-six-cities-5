@@ -4,13 +4,22 @@ import { AppRoute } from '../../const';
 type CardProps = {
   offer: OfferPreviewType;
   block: string;
+  onCardHover?: (offerId: OfferPreviewType['id'] | null) => void;
 };
 
-const Card = ({offer, block}: CardProps): JSX.Element => {
+const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   const {id, title, type, price, previewImage, isPremium, rating} = offer;
 
+  function handleMouseEnter () {
+    onCardHover?.(id);
+  }
+
+  function handleMouseLeave () {
+    onCardHover?.(null);
+  }
+
   return (
-    <article className={`${block}__card place-card`}>
+    <article className={`${block}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
