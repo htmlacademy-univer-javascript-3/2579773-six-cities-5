@@ -1,7 +1,3 @@
-const CardsInfo = {
-  PlacesCount: 5
-};
-
 const enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -9,4 +5,13 @@ const enum AppRoute {
   Offer = '/offer/:id'
 }
 
-export {CardsInfo, AppRoute};
+const enum CityName {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
+
+export {AppRoute, CityName};
