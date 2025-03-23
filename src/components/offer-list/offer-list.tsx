@@ -1,12 +1,13 @@
 import Card from '../card/card';
 import { OfferPreviewType } from '../../types/offer-preview';
-import {useState, ChangeEvent} from 'react';
+import {useState} from 'react';
 
 type OfferListProps = {
   offers: OfferPreviewType[];
 }
 
 const OfferList = ({offers}: OfferListProps): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
 
   function handleCardHover(offerId: OfferPreviewType['id'] | null) {

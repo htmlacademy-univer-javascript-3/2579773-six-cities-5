@@ -26,7 +26,11 @@ const offers: OfferType[] = [
     previewImage: '/img/apartment-01.jpg',
     images: [
       '/img/amsterdam.jpg',
-      '/public/img/amsterdam.jpg'
+      '/public/img/apartment-small-04.jpg',
+      '/public/img/amsterdam.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
     ],
     bedrooms: 2,
     maxAdults: 3,
@@ -62,7 +66,11 @@ const offers: OfferType[] = [
     previewImage: '/img/apartment-02.jpg',
     images: [
       '/img/amsterdam.jpg',
-      '/img/amsterdam.jpg'
+      '/public/img/apartment-small-04.jpg',
+      '/img/amsterdam.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
     ],
     bedrooms: 1,
     maxAdults: 2,
@@ -98,6 +106,10 @@ const offers: OfferType[] = [
     previewImage: '/img/apartment-03.jpg',
     images: [
       '/img/amsterdam.jpg',
+      '/public/img/apartment-small-04.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
     ],
     bedrooms: 3,
     maxAdults: 4,
@@ -133,7 +145,11 @@ const offers: OfferType[] = [
     previewImage: '/img/apartment-01.jpg',
     images: [
       '/img/amsterdam.jpg',
+      '/public/img/apartment-small-04.jpg',
       '/img/amsterdam.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
+      '/public/img/studio-01.jpg',
     ],
     bedrooms: 2,
     maxAdults: 3,
