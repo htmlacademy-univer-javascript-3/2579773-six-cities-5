@@ -7,7 +7,6 @@ type OfferListProps = {
 }
 
 const OfferList = ({offers}: OfferListProps): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
 
   function handleCardHover(offerId: OfferPreviewType['id'] | null) {
@@ -18,6 +17,7 @@ const OfferList = ({offers}: OfferListProps): JSX.Element => {
       {offers.map((offer) => (
         <Card key={offer.id} offer={offer} block="cities" onCardHover={handleCardHover}/>
       ))}
+      {activeOffer}
     </div>
   );
 };
