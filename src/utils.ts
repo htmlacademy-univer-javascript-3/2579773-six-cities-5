@@ -1,4 +1,5 @@
 import { OfferPreviewType } from './types/offer-preview';
+import { AppRoute } from './const';
 
 function getFavorites(favorites:OfferPreviewType[]) {
   return favorites.reduce<{ [key: string]: OfferPreviewType[] }>((acc, curr) => {
@@ -11,4 +12,8 @@ function getFavorites(favorites:OfferPreviewType[]) {
   }, {});
 }
 
-export {getFavorites};
+function getOfferLink(id:string) {
+  return `${AppRoute.Offer}/${id}`;
+}
+
+export {getFavorites, getOfferLink};

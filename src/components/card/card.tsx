@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { OfferPreviewType } from '../../types/offer-preview';
-import { AppRoute } from '../../const';
+import { getOfferLink } from '../../utils';
+
 type CardProps = {
   offer: OfferPreviewType;
   block: string;
@@ -19,7 +20,7 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   }
 
   const imageSize = block === 'favorites' ? { width: 150, height: 110 } : { width: 260, height: 200 };
-  const offerLink = `${AppRoute.Offer}/${id}`;
+  const offerLink = getOfferLink(id);
 
   return (
     <article className={`${block}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
