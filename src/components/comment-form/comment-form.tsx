@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, Fragment } from 'react';
+import { useState, ChangeEvent, Fragment, useMemo } from 'react';
 
 const ratingTitle: { [key: string]: string } = {
   '5': 'perfect',
@@ -14,7 +14,7 @@ const CommentForm = (): JSX.Element => {
     rating: ''
   });
 
-  const isValid = form.comment.length >= 50 && form.rating !== '';
+  const isValid = useMemo(() => form.comment.length >= 50 && form.rating !== '', [form.comment, form.rating]);
 
   function handleChange(evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
     setForm((prev) => ({
