@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { OfferPreviewType } from '../../types/offer-preview';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
-import CardFavorites from '../card-favorites/card-favorites';
+import Card from '../card/card';
 
 type FavoritesPageProps = {
   offers: OfferPreviewType[];
@@ -65,7 +65,7 @@ const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => {
                   </div>
                   <div className="favorites__places">
                     {cityOffers.map((offer) => (
-                      <CardFavorites key={offer.id} offer={offer} />
+                      <Card key={offer.id} offer={offer} block="favorites" />
                     ))}
                   </div>
                 </li>
