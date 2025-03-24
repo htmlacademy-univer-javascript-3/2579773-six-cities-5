@@ -3,20 +3,10 @@ import { OfferPreviewType } from '../../types/offer-preview';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
 import Card from '../card/card';
+import { getFavorites } from '../../utils';
 
 type FavoritesPageProps = {
   offers: OfferPreviewType[];
-}
-
-function getFavorites(favorites:OfferPreviewType[]) {
-  return favorites.reduce<{ [key: string]: OfferPreviewType[] }>((acc, curr) => {
-    const city = curr.city.name;
-    if(!(city in acc)) {
-      acc[city] = [];
-    }
-    acc[city].push(curr);
-    return acc;
-  }, {});
 }
 
 const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => {
