@@ -10,11 +10,11 @@ const ratingTitle: { [key: string]: string } = {
 
 const CommentForm = (): JSX.Element => {
   const [form, setForm] = useState({
-    comment: '',
+    review: '',
     rating: ''
   });
 
-  const isValid = useMemo(() => form.comment.length >= 50 && form.rating !== '', [form.comment, form.rating]);
+  const isValid = useMemo(() => form.review.length >= 50 && form.rating !== '', [form.review, form.rating]);
 
   function handleChange(evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
     setForm((prev) => ({
@@ -40,7 +40,7 @@ const CommentForm = (): JSX.Element => {
             </Fragment>
           ))}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={form.comment} onChange={handleChange}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={form.review} onChange={handleChange}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
