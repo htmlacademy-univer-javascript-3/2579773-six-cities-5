@@ -19,6 +19,7 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   }
 
   const imageSize = block === 'favorites' ? { width: 150, height: 110 } : { width: 260, height: 200 };
+  const offerLink = `${AppRoute.Offer}/${id}`;
 
   return (
     <article className={`${block}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -28,7 +29,7 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
         </div>
       )}
       <div className={`${block}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Offer}/${id}`}>
+        <Link to={offerLink}>
           <img className="place-card__image" src={previewImage} width={imageSize.width} height={imageSize.height} alt={title} />
         </Link>
       </div>
@@ -57,7 +58,7 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
+          <Link to={offerLink}>{title}</Link>
         </h2>
         <p className="place-card__type">{type.charAt(0).toUpperCase() + type.slice(1)}</p>
       </div>
