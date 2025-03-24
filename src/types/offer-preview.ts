@@ -12,7 +12,6 @@ type OfferPreviewType = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
-  goods: string[];
 };
 
 export type {OfferPreviewType};

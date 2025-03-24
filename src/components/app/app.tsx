@@ -6,10 +6,10 @@ import LoginPage from '../login-page/login-page';
 import OfferPage from '../offer-page/offer-page';
 import ErrorPage from '../error-page/error-page';
 import PrivateRoute from '../private-route/private-route';
-import { OfferType } from '../../types/offer';
+import { OfferPreviewType } from '../../types/offer-preview';
 
 type AppScreenProps = {
-  offers: OfferType[];
+  offers: OfferPreviewType[];
 }
 
 const App = ({offers}: AppScreenProps): JSX.Element => (
