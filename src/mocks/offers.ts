@@ -12,13 +12,13 @@ const offers: OfferPreviewType[] = [
       location: {
         latitude: 52.35514938496378,
         longitude: 4.673877537499948,
-        zoom: 8
+        zoom: 10
       }
     },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10
     },
     isFavorite: false,
     isPremium: false,
@@ -33,14 +33,14 @@ const offers: OfferPreviewType[] = [
     city: {
       name: CityName.Amsterdam,
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
         zoom: 10
       }
     },
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 10
     },
     isFavorite: true,
@@ -56,15 +56,15 @@ const offers: OfferPreviewType[] = [
     city: {
       name: CityName.Amsterdam,
       location: {
-        latitude: 52.365,
-        longitude: 4.902,
-        zoom: 9
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 10
       }
     },
     location: {
-      latitude: 52.365,
-      longitude: 4.902,
-      zoom: 9
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 10
     },
     isFavorite: false,
     isPremium: true,
@@ -79,15 +79,15 @@ const offers: OfferPreviewType[] = [
     city: {
       name: CityName.Amsterdam,
       location: {
-        latitude: 52.358,
-        longitude: 4.881,
-        zoom: 9
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 10
       }
     },
     location: {
-      latitude: 52.358,
-      longitude: 4.881,
-      zoom: 9
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 10
     },
     isFavorite: true,
     isPremium: true,
@@ -95,6 +95,5 @@ const offers: OfferPreviewType[] = [
     previewImage: '/img/apartment-01.jpg',
   }
 ];
-
 
 export {offers};
