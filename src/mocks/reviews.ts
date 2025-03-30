@@ -7,7 +7,7 @@ const reviews: ReviewType[] = [
     user: {
       avatarUrl: 'img/avatar-max.jpg',
       isPro: false,
-      name: 'Oliver Conner"'
+      name: 'Oliver Conner'
     },
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     rating: 4
