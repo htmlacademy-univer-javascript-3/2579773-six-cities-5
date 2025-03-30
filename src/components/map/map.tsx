@@ -14,19 +14,12 @@ type MapProps = {
 const Map = ({points, city, activeOffer}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const markersRef = useRef<leaflet.Marker[]>([]);
 
   useEffect(() => {
-    if(map) {
-      map.eachLayer((layer) => {
-        if (layer instanceof leaflet.Marker) {
-          map.removeLayer(layer);
-        }
-      });
-    }
-
     if (map) {
       points.forEach((point) => {
-        leaflet
+        const marker = leaflet
           .marker({
             lat: point.location.latitude,
             lng: point.location.longitude,
@@ -34,7 +27,12 @@ const Map = ({points, city, activeOffer}: MapProps): JSX.Element => {
             icon: point.id === activeOffer ? currentCustomIcon : defaultCustomIcon,
           })
           .addTo(map);
+        markersRef.current.push(marker);
       });
+      return () => {
+        markersRef.current.forEach((marker) => map.removeLayer(marker));
+        markersRef.current = [];
+      };
     }
   }, [map, points, activeOffer]);
 
