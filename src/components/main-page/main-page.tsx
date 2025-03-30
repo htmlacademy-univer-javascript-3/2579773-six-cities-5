@@ -102,7 +102,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offers[0].city} points={offers} activeOffer={activeOffer} />
+                <Map city={offers[0].city} offers={offers} activeOffer={activeOffer} />
               </section>
             </div>
           </div>

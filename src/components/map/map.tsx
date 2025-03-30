@@ -6,25 +6,25 @@ import { currentCustomIcon, defaultCustomIcon } from './pin';
 import useMap from '../../hooks/hooks';
 
 type MapProps = {
-  points: OfferPreviewType[];
+  offers: OfferPreviewType[];
   city: OfferPreviewType['city'];
   activeOffer: OfferPreviewType['id'] | null;
 }
 
-const Map = ({points, city, activeOffer}: MapProps): JSX.Element => {
+const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markersRef = useRef<leaflet.Marker[]>([]);
 
   useEffect(() => {
     if (map) {
-      points.forEach((point) => {
+      offers.forEach((offer) => {
         const marker = leaflet
           .marker({
-            lat: point.location.latitude,
-            lng: point.location.longitude,
+            lat: offer.location.latitude,
+            lng: offer.location.longitude,
           }, {
-            icon: point.id === activeOffer ? currentCustomIcon : defaultCustomIcon,
+            icon: offer.id === activeOffer ? currentCustomIcon : defaultCustomIcon,
           })
           .addTo(map);
         markersRef.current.push(marker);
@@ -34,7 +34,7 @@ const Map = ({points, city, activeOffer}: MapProps): JSX.Element => {
         markersRef.current = [];
       };
     }
-  }, [map, points, activeOffer]);
+  }, [map, offers, activeOffer]);
 
   return (
     <div style={{height: '100%'}} ref={mapRef}></div>
