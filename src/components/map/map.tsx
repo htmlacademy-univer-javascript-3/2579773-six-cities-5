@@ -9,12 +9,14 @@ type MapProps = {
   offers: OfferPreviewType[];
   city: OfferPreviewType['city'];
   activeOffer: OfferPreviewType['id'] | null;
+  block: string;
 }
 
-const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
+const Map = ({offers, city, activeOffer, block}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markersRef = useRef<leaflet.Marker[]>([]);
+  const mapSize = block === 'offer' ? { width: '1144px', height: '579px', margin: 'auto'} : { height: '100%' };
 
   useEffect(() => {
     if (map) {
@@ -37,7 +39,9 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   }, [map, offers, activeOffer]);
 
   return (
-    <div style={{height: '100%'}} ref={mapRef}></div>
+    <section className={`${block}__map map`}>
+      <div style={mapSize} ref={mapRef}></div>
+    </section>
   );
 };
 

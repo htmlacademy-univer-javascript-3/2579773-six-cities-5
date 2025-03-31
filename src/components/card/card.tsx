@@ -23,13 +23,13 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   const offerLink = getOfferLink(id);
 
   return (
-    <article className={`${block}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <article className={`${block === 'near' ? 'near-places__card' : `${block}__card`} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className={`${block}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${block === 'near' ? 'near-places__image-wrapper' : `${block}__image-wrapper`} place-card__image-wrapper`}>
         <Link to={offerLink}>
           <img className="place-card__image" src={previewImage} width={imageSize.width} height={imageSize.height} alt={title} />
         </Link>
