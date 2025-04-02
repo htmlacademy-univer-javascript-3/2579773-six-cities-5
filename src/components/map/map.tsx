@@ -16,7 +16,6 @@ const Map = ({offers, city, activeOffer, block}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markersRef = useRef<leaflet.Marker[]>([]);
-  const mapSize = block === 'offer' ? { width: '1144px', height: '579px', margin: 'auto'} : { height: '100%' };
 
   useEffect(() => {
     if (map) {
@@ -40,7 +39,7 @@ const Map = ({offers, city, activeOffer, block}: MapProps): JSX.Element => {
 
   return (
     <section className={`${block}__map map`}>
-      <div style={mapSize} ref={mapRef}></div>
+      <div style={{width: '100%', height: '100%'}} ref={mapRef}></div>
     </section>
   );
 };
