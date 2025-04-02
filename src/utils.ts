@@ -23,4 +23,8 @@ function formatDate(date: string) {
   }).format(new Date(date));
 }
 
-export {getFavorites, getOfferLink, formatDate};
+function getRatingWidth(rating: number): string {
+  return `${(rating / 5) * 100}%`;
+}
+
+export {getFavorites, getOfferLink, formatDate, getRatingWidth};

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { OfferPreviewType } from '../../types/offer-preview';
-import { getOfferLink } from '../../utils';
+import { getOfferLink, getRatingWidth } from '../../utils';
 
 type CardProps = {
   offer: OfferPreviewType;
@@ -50,9 +50,7 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
             <span
-              style={{
-                width: `${(rating / 5) * 100}%`
-              }}
+              style={{width: getRatingWidth(rating)}}
             >
             </span>
             <span className="visually-hidden">Rating</span>
