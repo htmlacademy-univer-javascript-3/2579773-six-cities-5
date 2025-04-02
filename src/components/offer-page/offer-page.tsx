@@ -9,12 +9,9 @@ import OfferList from '../offer-list/offer-list';
 import { OfferPreviewType } from '../../types/offer-preview';
 import { useParams } from 'react-router-dom';
 import CommentForm from '../comment-form/comment-form';
+import { offers } from '../../mocks/offers';
 
-type OfferPageProps = {
-  offers: OfferPreviewType[];
-}
-
-const OfferPage = ({offers}: OfferPageProps): JSX.Element => {
+const OfferPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>();
   const filteredOffers = offers.filter((offer) => offer.id !== id);
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
