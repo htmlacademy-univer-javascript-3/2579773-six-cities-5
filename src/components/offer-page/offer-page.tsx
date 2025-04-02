@@ -7,15 +7,13 @@ import Map from '../map/map';
 import { useState } from 'react';
 import OfferList from '../offer-list/offer-list';
 import { OfferPreviewType } from '../../types/offer-preview';
-import { useParams } from 'react-router-dom';
 import CommentForm from '../comment-form/comment-form';
 import { offers } from '../../mocks/offers';
 
 const OfferPage = (): JSX.Element => {
-  const { id } = useParams<{ id: string }>();
-  const filteredOffers = offers.filter((offer) => offer.id !== id);
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
   const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
+  const filteredOffers = offers.slice(0, 3);
 
   return(
     <div className="page">
