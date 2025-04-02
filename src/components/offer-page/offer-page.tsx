@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
 import ReviewList from '../review-list/review-list';
+import { reviews } from '../../mocks/reviews';
 import Map from '../map/map';
 import { useState } from 'react';
 import OfferList from '../offer-list/offer-list';
 import { OfferPreviewType } from '../../types/offer-preview';
 import { useParams } from 'react-router-dom';
+import CommentForm from '../comment-form/comment-form';
 
 type OfferPageProps = {
   offers: OfferPreviewType[];
@@ -16,6 +18,7 @@ const OfferPage = ({offers}: OfferPageProps): JSX.Element => {
   const { id } = useParams<{ id: string }>();
   const filteredOffers = offers.filter((offer) => offer.id !== id);
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
+  const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
 
   return(
     <div className="page">
@@ -163,7 +166,11 @@ const OfferPage = ({offers}: OfferPageProps): JSX.Element => {
                   </p>
                 </div>
               </div>
-              <ReviewList />
+              <section className="offer__reviews reviews">
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewList reviews={sortedReviews} />
+                <CommentForm />
+              </section>
             </div>
           </div>
           <Map city={offers[0].city} offers={filteredOffers} activeOffer={activeOffer} block={'offer'}/>
