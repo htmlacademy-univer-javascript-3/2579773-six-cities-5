@@ -9,10 +9,9 @@ type MapProps = {
   offers: OfferPreviewType[];
   city: OfferPreviewType['city'];
   activeOffer: OfferPreviewType['id'] | null;
-  block: string;
 }
 
-const Map = ({offers, city, activeOffer, block}: MapProps): JSX.Element => {
+const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markersRef = useRef<leaflet.Marker[]>([]);
@@ -38,7 +37,7 @@ const Map = ({offers, city, activeOffer, block}: MapProps): JSX.Element => {
   }, [map, offers, activeOffer]);
 
   return (
-    <section className={`${block}__map map`}>
+    <section className={'offer__map map'}>
       <div style={{width: '100%', height: '100%'}} ref={mapRef}></div>
     </section>
   );

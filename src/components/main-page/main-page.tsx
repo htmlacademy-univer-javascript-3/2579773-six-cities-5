@@ -101,7 +101,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
               <OfferList offers={offers} setActiveOffer={setActiveOffer} block="cities"/>
             </section>
             <div className="cities__right-section">
-              <Map city={offers[0].city} offers={offers} activeOffer={activeOffer} block={'cities'} />
+              <Map city={offers[0].city} offers={offers} activeOffer={activeOffer} />
             </div>
           </div>
         </div>
