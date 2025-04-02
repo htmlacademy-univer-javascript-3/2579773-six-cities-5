@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Map from '../map/map';
 import { useState } from 'react';
+import CityList from '../city-list/city-list';
+import { CityType } from '../../types/city';
 
 type MainPageProps = {
   offers: OfferPreviewType[];
+  cities: CityType[];
 }
 
-const MainPage = ({offers}: MainPageProps): JSX.Element => {
+const MainPage = ({offers, cities}: MainPageProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
 
   return (
@@ -44,38 +47,7 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CityList cities={cities}/>
           </section>
         </div>
         <div className="cities">
