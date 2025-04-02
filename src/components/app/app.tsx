@@ -35,7 +35,7 @@ const App = ({offers}: AppScreenProps): JSX.Element => (
       />
       <Route
         path = {`${AppRoute.Offer}/:id`}
-        element ={<OfferPage offers={offers} />}
+        element ={<OfferPage />}
       />
       <Route
         path = "*"
