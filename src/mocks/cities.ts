@@ -4,43 +4,43 @@ import { CityType } from '../types/city';
 const cities: CityType[] = [
   { name: CityName.Paris,
     location: {
-      latitude: 48.8566,
-      longitude: 2.3522,
+      latitude: 48.864716,
+      longitude: 2.349014,
       zoom: 10
     }
   },
   { name: CityName.Cologne,
     location: {
-      latitude: 50.9375,
-      longitude: 6.9603,
+      latitude: 50.935173,
+      longitude: 6.953101,
       zoom: 10
     }
   },
   { name: CityName.Brussels,
     location: {
-      latitude: 50.8503,
-      longitude: 4.3517,
+      latitude: 50.8503463,
+      longitude: 4.3517211,
       zoom: 10
     }
   },
   { name: CityName.Amsterdam,
     location: {
-      latitude: 52.3676,
-      longitude: 4.9041,
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
       zoom: 10
     }
   },
   { name: CityName.Hamburg,
     location: {
-      latitude: 53.5511,
-      longitude: 9.9937,
+      latitude: 53.551086,
+      longitude: 9.993682,
       zoom: 10
     }
   },
   { name: CityName.Dusseldorf,
     location: {
-      latitude: 51.2277,
-      longitude: 6.7735,
+      latitude: 51.233334,
+      longitude: 6.783333,
       zoom: 10
     }
   },
