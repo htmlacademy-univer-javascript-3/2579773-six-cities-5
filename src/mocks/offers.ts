@@ -93,7 +93,53 @@ const offers: OfferPreviewType[] = [
     isPremium: true,
     rating: 3,
     previewImage: '/img/apartment-01.jpg',
-  }
+  },
+  {
+    id: crypto.randomUUID(),
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment',
+    price: 245,
+    city: {
+      name: CityName.Paris,
+      location: {
+        latitude: 48.864716,
+        longitude: 2.349014,
+        zoom: 10
+      }
+    },
+    location: {
+      latitude: 48.856613,
+      longitude: 2.352222,
+      zoom: 10
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 5,
+    previewImage: '/img/apartment-01.jpg'
+  },
+  {
+    id: crypto.randomUUID(),
+    title: 'Cozy modern apartment in city center',
+    type: 'room',
+    price: 155,
+    city: {
+      name: CityName.Paris,
+      location: {
+        latitude: 48.864716,
+        longitude: 2.349014,
+        zoom: 10
+      }
+    },
+    location: {
+      latitude: 48.858844,
+      longitude: 2.294351,
+      zoom: 10
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.5,
+    previewImage: '/img/apartment-02.jpg',
+  },
 ];
 
 export {offers};
