@@ -37,9 +37,7 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   }, [map, offers, activeOffer]);
 
   return (
-    <section className={'offer__map map'}>
-      <div style={{width: '100%', height: '100%'}} ref={mapRef}></div>
-    </section>
+    <div style={{width: '100%', height: '100%'}} ref={mapRef}></div>
   );
 };
 

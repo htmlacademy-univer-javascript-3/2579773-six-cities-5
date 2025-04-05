@@ -168,7 +168,9 @@ const OfferPage = (): JSX.Element => {
               </section>
             </div>
           </div>
-          <Map city={offers[0].city} offers={filteredOffers} activeOffer={activeOffer} />
+          <section className={'offer__map map'}>
+            <Map city={offers[0].city} offers={filteredOffers} activeOffer={activeOffer} />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
