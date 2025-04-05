@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { OfferPreviewType } from '../../types/offer-preview';
-import { getOfferLink } from '../../utils';
+import { getOfferLink, getRatingWidth } from '../../utils';
 
 type CardProps = {
   offer: OfferPreviewType;
@@ -23,13 +23,13 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   const offerLink = getOfferLink(id);
 
   return (
-    <article className={`${block}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <article className={`${block === 'near' ? 'near-places__card' : `${block}__card`} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className={`${block}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${block === 'near' ? 'near-places__image-wrapper' : `${block}__image-wrapper`} place-card__image-wrapper`}>
         <Link to={offerLink}>
           <img className="place-card__image" src={previewImage} width={imageSize.width} height={imageSize.height} alt={title} />
         </Link>
@@ -50,9 +50,7 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
             <span
-              style={{
-                width: `${(rating / 5) * 100}%`
-              }}
+              style={{width: getRatingWidth(rating)}}
             >
             </span>
             <span className="visually-hidden">Rating</span>

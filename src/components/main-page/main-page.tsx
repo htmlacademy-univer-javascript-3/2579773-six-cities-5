@@ -98,10 +98,10 @@ const MainPage = ({offers}: MainPageProps): JSX.Element => {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers} setActiveOffer={setActiveOffer}/>
+              <OfferList offers={offers} setActiveOffer={setActiveOffer} block="cities"/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
+              <section className={'offer__map map'}>
                 <Map city={offers[0].city} offers={offers} activeOffer={activeOffer} />
               </section>
             </div>
