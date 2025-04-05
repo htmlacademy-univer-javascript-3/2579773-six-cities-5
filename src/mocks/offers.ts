@@ -96,7 +96,7 @@ const offers: OfferPreviewType[] = [
   },
   {
     id: crypto.randomUUID(),
-    title: 'Beautiful & luxurious studio at great location',
+    title: 'Charming studio near historic landmarks',
     type: 'apartment',
     price: 245,
     city: {
@@ -119,7 +119,7 @@ const offers: OfferPreviewType[] = [
   },
   {
     id: crypto.randomUUID(),
-    title: 'Cozy modern apartment in city center',
+    title: 'Stylish room with a view of the Eiffel Tower',
     type: 'room',
     price: 155,
     city: {

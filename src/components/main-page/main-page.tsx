@@ -4,17 +4,22 @@ import OfferList from '../offer-list/offer-list';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Map from '../map/map';
-import { useState } from 'react';
 import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
+import {useAppSelector } from '../../hooks';
+import { useState } from 'react';
 
 type MainPageProps = {
-  offers: OfferPreviewType[];
   cities: CityType[];
 }
 
-const MainPage = ({offers, cities}: MainPageProps): JSX.Element => {
+const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
+
+  const selectedCityName = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
+  const filteredOffers = offers.filter((offer) => offer.city.name === selectedCityName);
+  const selectedCityData = cities.find((city) => city.name === selectedCityName) ?? cities[0];
 
   return (
     <div className="page page--gray page--main">
@@ -47,14 +52,14 @@ const MainPage = ({offers, cities}: MainPageProps): JSX.Element => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CityList cities={cities}/>
+            <CityList cities={cities} />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{filteredOffers.length} places to stay in {selectedCityName}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -70,11 +75,11 @@ const MainPage = ({offers, cities}: MainPageProps): JSX.Element => {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers} setActiveOffer={setActiveOffer}/>
+              <OfferList offers={filteredOffers} setActiveOffer={setActiveOffer}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offers[0].city} offers={offers} activeOffer={activeOffer} />
+                <Map city={selectedCityData} offers={filteredOffers} activeOffer={activeOffer} />
               </section>
             </div>
           </div>

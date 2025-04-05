@@ -18,9 +18,9 @@ const cities: CityType[] = [
   },
   { name: CityName.Brussels,
     location: {
-      latitude: 50.8503463,
-      longitude: 4.3517211,
-      zoom: 10
+      latitude: 50.8504,
+      longitude: 4.34878,
+      zoom: 11
     }
   },
   { name: CityName.Amsterdam,

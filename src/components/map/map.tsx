@@ -18,6 +18,11 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
 
   useEffect(() => {
     if (map) {
+      map.setView(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom
+      );
+
       offers.forEach((offer) => {
         const marker = leaflet
           .marker({
@@ -34,7 +39,7 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
         markersRef.current = [];
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, city, offers, activeOffer]);
 
   return (
     <div style={{height: '100%'}} ref={mapRef}></div>
