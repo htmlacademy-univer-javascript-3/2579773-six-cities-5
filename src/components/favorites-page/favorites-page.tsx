@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom';
-import { OfferPreviewType } from '../../types/offer-preview';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
 import Card from '../card/card';
 import { getFavorites } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { fillOffersList } from '../../store/action';
 
-type FavoritesPageProps = {
-  offers: OfferPreviewType[];
-}
+const FavoritesPage = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
 
-const FavoritesPage = ({offers}: FavoritesPageProps): JSX.Element => {
+  useEffect(() => {
+    if (offers.length === 0) {
+      dispatch(fillOffersList());
+    }
+  }, [dispatch, offers]);
+
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const favoritesByCity = getFavorites(favoriteOffers);
   return (

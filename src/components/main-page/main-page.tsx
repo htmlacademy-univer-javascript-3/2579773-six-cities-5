@@ -6,18 +6,27 @@ import { AppRoute } from '../../const';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
-import {useAppSelector } from '../../hooks';
-import { useState } from 'react';
+import {useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect, useState } from 'react';
+import { fillOffersList } from '../../store/action';
 
 type MainPageProps = {
   cities: CityType[];
 }
 
 const MainPage = ({cities}: MainPageProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
+
+  useEffect(() => {
+    if (offers.length === 0) {
+      dispatch(fillOffersList());
+    }
+  }, [dispatch, offers]);
+
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
 
   const selectedCityName = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
   const filteredOffers = offers.filter((offer) => offer.city.name === selectedCityName);
   const selectedCityData = cities.find((city) => city.name === selectedCityName) ?? cities[0];
 
