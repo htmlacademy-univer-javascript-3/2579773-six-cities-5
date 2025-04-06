@@ -25,8 +25,13 @@ function useMap(mapRef:React.MutableRefObject<HTMLDivElement | null>, city: Offe
       setMap(instance);
       isRenderedRef.current = true;
     }
-
-  }, [mapRef, city]);
+    if (map) {
+      map.setView(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom
+      );
+    }
+  }, [mapRef, city, map]);
 
   return map;
 }

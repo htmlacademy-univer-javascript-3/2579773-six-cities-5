@@ -93,7 +93,53 @@ const offers: OfferPreviewType[] = [
     isPremium: true,
     rating: 3,
     previewImage: '/img/apartment-01.jpg',
-  }
+  },
+  {
+    id: '9f3e2c61-6b91-4ff4-a430-42a5f68bfb15',
+    title: 'Charming studio near historic landmarks',
+    type: 'apartment',
+    price: 245,
+    city: {
+      name: CityName.Paris,
+      location: {
+        latitude: 48.864716,
+        longitude: 2.349014,
+        zoom: 10
+      }
+    },
+    location: {
+      latitude: 48.856613,
+      longitude: 2.352222,
+      zoom: 10
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 5,
+    previewImage: '/img/apartment-01.jpg'
+  },
+  {
+    id: '5e0a09fd-27f7-4e43-b5b3-1e52b620b3d0',
+    title: 'Stylish room with a view of the Eiffel Tower',
+    type: 'room',
+    price: 155,
+    city: {
+      name: CityName.Paris,
+      location: {
+        latitude: 48.864716,
+        longitude: 2.349014,
+        zoom: 10
+      }
+    },
+    location: {
+      latitude: 48.858844,
+      longitude: 2.294351,
+      zoom: 10
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.5,
+    previewImage: '/img/apartment-02.jpg',
+  },
 ];
 
 export {offers};

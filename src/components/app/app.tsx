@@ -6,26 +6,24 @@ import LoginPage from '../login-page/login-page';
 import OfferPage from '../offer-page/offer-page';
 import ErrorPage from '../error-page/error-page';
 import PrivateRoute from '../private-route/private-route';
-import { OfferPreviewType } from '../../types/offer-preview';
+import { CityType } from '../../types/city';
 
 type AppScreenProps = {
-  offers: OfferPreviewType[];
+  cities: CityType[];
 }
 
-const App = ({offers}: AppScreenProps): JSX.Element => (
+const App = ({cities}: AppScreenProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
       <Route
         path = {AppRoute.Main}
-        element = {<MainPage offers={offers}/>}
+        element = {<MainPage cities={cities}/>}
       />
       <Route
         path = {AppRoute.Favorites}
         element = {
-          <PrivateRoute
-            authorizationStatus
-          >
-            <FavoritesPage offers={offers}/>
+          <PrivateRoute authorizationStatus>
+            <FavoritesPage />
           </PrivateRoute>
         }
       />
