@@ -21,8 +21,8 @@ const App = ({offers, cities}: AppScreenProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fillOffersList());
-  }, [dispatch]);
+    dispatch(fillOffersList(offers));
+  }, [dispatch, offers]);
 
   return(
     <BrowserRouter>

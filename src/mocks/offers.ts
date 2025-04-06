@@ -3,7 +3,7 @@ import { OfferPreviewType } from '../types/offer-preview';
 
 const offers: OfferPreviewType[] = [
   {
-    id: crypto.randomUUID(),
+    id: '173c00f5-2ebf-43ca-8b75-3d2a6901c5a0',
     title: 'Beautiful & luxurious studio at great location',
     type: 'apartment',
     price: 120,
@@ -26,7 +26,7 @@ const offers: OfferPreviewType[] = [
     previewImage: '/img/apartment-01.jpg'
   },
   {
-    id: crypto.randomUUID(),
+    id: '03a78870-8692-4603-ac6b-6125ad583448',
     title: 'Cozy modern apartment in city center',
     type: 'room',
     price: 150,
@@ -49,7 +49,7 @@ const offers: OfferPreviewType[] = [
     previewImage: '/img/apartment-02.jpg',
   },
   {
-    id: crypto.randomUUID(),
+    id: '01c8e5a6-16a6-46ed-ad17-ff73f02fded4',
     title: 'Spacious loft with canal view',
     type: 'house',
     price: 200,
@@ -72,7 +72,7 @@ const offers: OfferPreviewType[] = [
     previewImage: '/img/apartment-03.jpg',
   },
   {
-    id: crypto.randomUUID(),
+    id: '6dd379af-7630-47b8-9a2c-fc5570306fdf',
     title: 'Elegant hotel in a quiet area',
     type: 'hotel',
     price: 180,
@@ -95,7 +95,7 @@ const offers: OfferPreviewType[] = [
     previewImage: '/img/apartment-01.jpg',
   },
   {
-    id: crypto.randomUUID(),
+    id: '9f3e2c61-6b91-4ff4-a430-42a5f68bfb15',
     title: 'Charming studio near historic landmarks',
     type: 'apartment',
     price: 245,
@@ -118,7 +118,7 @@ const offers: OfferPreviewType[] = [
     previewImage: '/img/apartment-01.jpg'
   },
   {
-    id: crypto.randomUUID(),
+    id: '5e0a09fd-27f7-4e43-b5b3-1e52b620b3d0',
     title: 'Stylish room with a view of the Eiffel Tower',
     type: 'room',
     price: 155,
