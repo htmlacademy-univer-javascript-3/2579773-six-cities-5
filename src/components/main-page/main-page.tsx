@@ -9,6 +9,7 @@ import { CityType } from '../../types/city';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import { fillOffersList } from '../../store/action';
+import { offers as mockOffers } from '../../mocks/offers';
 
 type MainPageProps = {
   cities: CityType[];
@@ -20,7 +21,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
 
   useEffect(() => {
     if (offers.length === 0) {
-      dispatch(fillOffersList());
+      dispatch(fillOffersList(mockOffers));
     }
   }, [dispatch, offers]);
 

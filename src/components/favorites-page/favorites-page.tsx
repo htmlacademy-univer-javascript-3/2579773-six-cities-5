@@ -6,6 +6,7 @@ import { getFavorites } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { fillOffersList } from '../../store/action';
+import {offers as mockOffers} from '../../mocks/offers';
 
 const FavoritesPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const FavoritesPage = (): JSX.Element => {
 
   useEffect(() => {
     if (offers.length === 0) {
-      dispatch(fillOffersList());
+      dispatch(fillOffersList(mockOffers));
     }
   }, [dispatch, offers]);
 
