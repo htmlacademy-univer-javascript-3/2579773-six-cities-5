@@ -40,7 +40,7 @@ function sortHighToLow(a: OfferPreviewType, b: OfferPreviewType) {
 }
 
 const sorting: Record<SortingType, (offers: OfferPreviewType[]) => OfferPreviewType[]> = {
-  [SortingType.Popular]: (offers) => offers.slice(),
+  [SortingType.Popular]: (offers) => offers ,
   [SortingType.LowToHigh]: (offers) => offers.toSorted(sortLowToHigh),
   [SortingType.HighToLow]: (offers) => offers.toSorted(sortHighToLow),
   [SortingType.TopRated]: (offers) => offers.toSorted(sortByRating),
