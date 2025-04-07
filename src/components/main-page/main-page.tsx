@@ -8,7 +8,7 @@ import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
-import { fillOffersList } from '../../store/action';
+import { fillOffersList, setSortOption } from '../../store/action';
 import { offers as mockOffers } from '../../mocks/offers';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
@@ -33,7 +33,10 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const filteredOffers = offers.filter((offer) => offer.city.name === selectedCityName);
   const selectedCityData = cities.find((city) => city.name === selectedCityName) ?? cities[0];
 
-  const [selectedSort, setSelectedSort] = useState<SortingType>(SortingType.Popular);
+  const selectedSort = useAppSelector((state) => state.sortOption);
+  const handleSortChange = (type: SortingType) => {
+    dispatch(setSortOption(type));
+  };
   const sortedOffers = sorting[selectedSort](filteredOffers);
 
   return (
@@ -76,7 +79,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {selectedCityName}</b>
 
-              <Sorting selectedSort={selectedSort} onSortChange={setSelectedSort} />
+              <Sorting selectedSort={selectedSort} onSortChange={handleSortChange} />
               <OfferList offers={sortedOffers} setActiveOffer={setActiveOffer} block='cities' />
             </section>
             <div className="cities__right-section">
