@@ -2,13 +2,13 @@ import Logo from '../logo/logo';
 import { OfferPreviewType } from '../../types/offer-preview';
 import OfferList from '../offer-list/offer-list';
 import { Link } from 'react-router-dom';
-import { AppRoute, SortingType } from '../../const';
+import { AppRoute } from '../../const';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
-import { fillOffersList, setSortOption } from '../../store/action';
+import { fillOffersList } from '../../store/action';
 import { offers as mockOffers } from '../../mocks/offers';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
@@ -32,11 +32,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const selectedCityName = useAppSelector((state) => state.city);
   const filteredOffers = offers.filter((offer) => offer.city.name === selectedCityName);
   const selectedCityData = cities.find((city) => city.name === selectedCityName) ?? cities[0];
-
   const selectedSort = useAppSelector((state) => state.sortOption);
-  const handleSortChange = (type: SortingType) => {
-    dispatch(setSortOption(type));
-  };
   const sortedOffers = sorting[selectedSort](filteredOffers);
 
   return (
@@ -79,7 +75,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {selectedCityName}</b>
 
-              <Sorting selectedSort={selectedSort} onSortChange={handleSortChange} />
+              <Sorting />
               <OfferList offers={sortedOffers} setActiveOffer={setActiveOffer} block='cities' />
             </section>
             <div className="cities__right-section">

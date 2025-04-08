@@ -1,18 +1,20 @@
 import { SortingType } from '../../const';
 import { useState } from 'react';
-
-type SortingProps = {
-  selectedSort: SortingType;
-  onSortChange: (type: SortingType) => void;
-}
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setSortOption } from '../../store/action';
 
 const sortingOptions = Object.values(SortingType);
 
-const Sorting = ({selectedSort, onSortChange}: SortingProps): JSX.Element => {
+const Sorting = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const selectedSort = useAppSelector((state) => state.sortOption);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (option: SortingType) => {
-    onSortChange(option);
+    if (option !== selectedSort) {
+      dispatch(setSortOption(option));
+    }
     setIsOpen(false);
   };
 
