@@ -1,5 +1,5 @@
 import { OfferPreviewType } from './types/offer-preview';
-import { AppRoute } from './const';
+import { AppRoute, SortingType } from './const';
 
 function getFavorites(favorites:OfferPreviewType[]) {
   return favorites.reduce<{ [key: string]: OfferPreviewType[] }>((acc, curr) => {
@@ -27,4 +27,23 @@ function getRatingWidth(rating: number): string {
   return `${(rating / 5) * 100}%`;
 }
 
-export {getFavorites, getOfferLink, formatDate, getRatingWidth};
+function sortByRating(a: OfferPreviewType, b: OfferPreviewType) {
+  return b.rating - a.rating;
+}
+
+function sortLowToHigh(a: OfferPreviewType, b: OfferPreviewType) {
+  return a.price - b.price;
+}
+
+function sortHighToLow(a: OfferPreviewType, b: OfferPreviewType) {
+  return b.price - a.price;
+}
+
+const sorting: Record<SortingType, (offers: OfferPreviewType[]) => OfferPreviewType[]> = {
+  [SortingType.Popular]: (offers) => offers ,
+  [SortingType.LowToHigh]: (offers) => offers.toSorted(sortLowToHigh),
+  [SortingType.HighToLow]: (offers) => offers.toSorted(sortHighToLow),
+  [SortingType.TopRated]: (offers) => offers.toSorted(sortByRating),
+};
+
+export {getFavorites, getOfferLink, formatDate, getRatingWidth, sorting};
