@@ -25,4 +25,7 @@ enum SortingType {
   TopRated = 'Top rated first'
 }
 
-export {AppRoute, CityName, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, SortingType};
+const BASE_URL = 'https://14.design.htmlacademy.pro/six-cities';
+const TIMEOUT = 5000;
+
+export {AppRoute, CityName, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, SortingType, BASE_URL, TIMEOUT};
