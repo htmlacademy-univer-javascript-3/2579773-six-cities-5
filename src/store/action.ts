@@ -5,5 +5,6 @@ import { OfferPreviewType } from '../types/offer-preview';
 const changeCity = createAction<CityName>('changeCity');
 const fillOffersList = createAction<OfferPreviewType[]>('fillOffersList');
 const setSortOption = createAction<SortingType>('sort');
+const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
 
-export {changeCity, fillOffersList, setSortOption};
+export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus};

@@ -12,6 +12,7 @@ import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
 import { store } from '../../store';
 import { fetchOffers } from '../../store/api-actions';
+import Spinner from '../../spinner/spinner';
 
 type MainPageProps = {
   cities: CityType[];
@@ -34,6 +35,13 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const selectedCityData = cities.find((city) => city.name === selectedCityName) ?? cities[0];
   const selectedSort = useAppSelector((state) => state.sortOption);
   const sortedOffers = sorting[selectedSort](filteredOffers);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+
+  if (isOffersLoading) {
+    return (
+      <Spinner />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">
