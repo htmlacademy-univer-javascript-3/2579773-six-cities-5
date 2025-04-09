@@ -6,11 +6,7 @@ import { OfferPreviewType } from '../types/offer-preview';
 import { fillOffersList } from './action';
 import { setOffersLoadingStatus } from './action';
 
-const fetchOffers = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+const fetchOffers = createAsyncThunk<void, undefined, {dispatch: AppDispatch;state: State;extra: AxiosInstance}>(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersLoadingStatus(true));
