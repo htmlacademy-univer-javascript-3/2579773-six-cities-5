@@ -8,10 +8,10 @@ import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
-import { fillOffersList } from '../../store/action';
-import { offers as mockOffers } from '../../mocks/offers';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
+import { store } from '../../store';
+import { fetchOffers } from '../../store/api-actions';
 
 type MainPageProps = {
   cities: CityType[];
@@ -23,7 +23,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
 
   useEffect(() => {
     if (offers.length === 0) {
-      dispatch(fillOffersList(mockOffers));
+      store.dispatch(fetchOffers());
     }
   }, [dispatch, offers]);
 

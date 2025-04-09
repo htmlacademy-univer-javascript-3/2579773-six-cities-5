@@ -28,4 +28,8 @@ enum SortingType {
 const BASE_URL = 'https://14.design.htmlacademy.pro/six-cities';
 const TIMEOUT = 5000;
 
-export {AppRoute, CityName, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, SortingType, BASE_URL, TIMEOUT};
+const enum APIRoute {
+  Offers = '/offers',
+}
+
+export {AppRoute, CityName, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, SortingType, BASE_URL, TIMEOUT, APIRoute};
