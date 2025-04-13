@@ -10,7 +10,6 @@ import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
-import { store } from '../../store';
 import { fetchOffers } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
 
@@ -24,7 +23,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
 
   useEffect(() => {
     if (offers.length === 0) {
-      store.dispatch(fetchOffers());
+      dispatch(fetchOffers());
     }
   }, [dispatch, offers]);
 
