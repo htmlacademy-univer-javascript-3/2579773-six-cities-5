@@ -8,10 +8,10 @@ import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
-import { fillOffersList } from '../../store/action';
-import { offers as mockOffers } from '../../mocks/offers';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
+import { fetchOffers } from '../../store/api-actions';
+import Spinner from '../../spinner/spinner';
 
 type MainPageProps = {
   cities: CityType[];
@@ -23,7 +23,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
 
   useEffect(() => {
     if (offers.length === 0) {
-      dispatch(fillOffersList(mockOffers));
+      dispatch(fetchOffers());
     }
   }, [dispatch, offers]);
 
@@ -34,6 +34,13 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const selectedCityData = cities.find((city) => city.name === selectedCityName) ?? cities[0];
   const selectedSort = useAppSelector((state) => state.sortOption);
   const sortedOffers = sorting[selectedSort](filteredOffers);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+
+  if (isOffersLoading) {
+    return (
+      <Spinner />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">
