@@ -1,9 +1,9 @@
-import { UserType } from './user';
+import { ReviewUserType } from './review-user';
 
 type ReviewType = {
   id: string;
   date: string;
-  user: UserType;
+  user: ReviewUserType;
   comment: string;
   rating: number;
 };
