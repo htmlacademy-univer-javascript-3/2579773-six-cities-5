@@ -1,8 +1,5 @@
-import Logo from '../logo/logo';
 import { OfferPreviewType } from '../../types/offer-preview';
 import OfferList from '../offer-list/offer-list';
-import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
@@ -10,8 +7,9 @@ import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
-import { fetchOffers, logoutAction } from '../../store/api-actions';
+import { fetchOffers } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
+import Header from '../header/header';
 
 type MainPageProps = {
   cities: CityType[];
@@ -35,8 +33,6 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const selectedSort = useAppSelector((state) => state.sortOption);
   const sortedOffers = sorting[selectedSort](filteredOffers);
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
 
   if (isOffersLoading) {
     return (
@@ -44,50 +40,9 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
     );
   }
 
-  const handleLogout = (evt: React.MouseEvent) => {
-    evt.preventDefault();
-    dispatch(logoutAction());
-  };
-
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                {authorizationStatus === AuthorizationStatus.Auth && user ? (
-                  <>
-                    <li className="header__nav-item user">
-                      <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                        <div className="header__avatar-wrapper user__avatar-wrapper">
-                        </div>
-                        <span className="header__user-name user__name">{user?.email}</span>
-                        <span className="header__favorite-count">3</span>
-                      </Link>
-                    </li>
-                    <li className="header__nav-item">
-                      <a className="header__nav-link" href="#" onClick={handleLogout}>
-                        <span className="header__signout">Sign out</span>
-                      </a>
-                    </li>
-                  </>
-                ) : (
-                  <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__login">Sign in</span>
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

@@ -1,6 +1,7 @@
-import axios, {AxiosInstance, InternalAxiosRequestConfig} from 'axios';
-import { BASE_URL, TIMEOUT } from '../const';
+import axios, {AxiosError, AxiosInstance, InternalAxiosRequestConfig} from 'axios';
+import { AppRoute, BASE_URL, TIMEOUT } from '../const';
 import { getToken } from './token';
+import browserHistory from '../browser-history';
 
 const createApi = (): AxiosInstance => {
   const api = axios.create({
@@ -16,6 +17,15 @@ const createApi = (): AxiosInstance => {
     }
     return config;
   });
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<{ error: string}>) => {
+      if (error.response?.status === 401) {
+        browserHistory.push(AppRoute.NotFound);
+      }
+      throw error;
+    });
 
   return api;
 };

@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../main-page/main-page';
 import FavoritesPage from '../favorites-page/favorites-page';
@@ -12,6 +12,8 @@ import { useEffect } from 'react';
 import { checkAuthAction } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
 import { State } from '../../types/state';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-route';
 
 type AppScreenProps = {
   cities: CityType[];
@@ -30,7 +32,7 @@ const App = ({cities}: AppScreenProps): JSX.Element => {
   }
 
   return(
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path = {AppRoute.Main}
@@ -57,7 +59,7 @@ const App = ({cities}: AppScreenProps): JSX.Element => {
           element ={<ErrorPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 };
 
