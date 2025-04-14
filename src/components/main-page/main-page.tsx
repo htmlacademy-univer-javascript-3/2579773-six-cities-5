@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
-import { fetchOffers } from '../../store/api-actions';
+import { fetchOffers, logoutAction } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
 
 type MainPageProps = {
@@ -44,6 +44,11 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
     );
   }
 
+  const handleLogout = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -63,9 +68,9 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to={AppRoute.Login}>
+                      <a className="header__nav-link" href="#" onClick={handleLogout}>
                         <span className="header__signout">Sign out</span>
-                      </Link>
+                      </a>
                     </li>
                   </>
                 ) : (
