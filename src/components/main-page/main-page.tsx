@@ -2,7 +2,7 @@ import Logo from '../logo/logo';
 import { OfferPreviewType } from '../../types/offer-preview';
 import OfferList from '../offer-list/offer-list';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
@@ -35,6 +35,8 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
   const selectedSort = useAppSelector((state) => state.sortOption);
   const sortedOffers = sorting[selectedSort](filteredOffers);
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const user = useAppSelector((state) => state.user);
 
   if (isOffersLoading) {
     return (
@@ -50,19 +52,31 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
             <Logo />
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </Link>
-                </li>
-                <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Login}>
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
+                {authorizationStatus === AuthorizationStatus.Auth && user ? (
+                  <>
+                    <li className="header__nav-item user">
+                      <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
+                        <div className="header__avatar-wrapper user__avatar-wrapper">
+                        </div>
+                        <span className="header__user-name user__name">{user?.email}</span>
+                        <span className="header__favorite-count">3</span>
+                      </Link>
+                    </li>
+                    <li className="header__nav-item">
+                      <Link className="header__nav-link" to={AppRoute.Login}>
+                        <span className="header__signout">Sign out</span>
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li className="header__nav-item user">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__login">Sign in</span>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
