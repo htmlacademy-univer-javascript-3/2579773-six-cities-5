@@ -30,6 +30,14 @@ const TIMEOUT = 5000;
 
 const enum APIRoute {
   Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
 }
 
-export {AppRoute, CityName, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, SortingType, BASE_URL, TIMEOUT, APIRoute};
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export {AppRoute, CityName, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, SortingType, BASE_URL, TIMEOUT, APIRoute, AuthorizationStatus};
