@@ -1,8 +1,5 @@
-import Logo from '../logo/logo';
 import { OfferPreviewType } from '../../types/offer-preview';
 import OfferList from '../offer-list/offer-list';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import { CityType } from '../../types/city';
@@ -12,6 +9,7 @@ import Sorting from '../sorting/sorting';
 import { sorting } from '../../utils';
 import { fetchOffers } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
+import Header from '../header/header';
 
 type MainPageProps = {
   cities: CityType[];
@@ -44,31 +42,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
 
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </Link>
-                </li>
-                <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Login}>
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
