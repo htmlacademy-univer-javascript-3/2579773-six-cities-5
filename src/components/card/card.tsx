@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { OfferPreviewType } from '../../types/offer-preview';
 import { getOfferLink, getRatingWidth } from '../../utils';
 import { updateFavorites } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 type CardProps = {
   offer: OfferPreviewType;
@@ -12,7 +13,9 @@ type CardProps = {
 
 const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   const {id, title, type, price, previewImage, isPremium, rating, isFavorite} = offer;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   function handleMouseEnter () {
     onCardHover?.(id);
@@ -23,6 +26,10 @@ const Card = ({offer, block, onCardHover}: CardProps): JSX.Element => {
   }
 
   const handleBookmarkClick = () => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+      return;
+    }
     dispatch(updateFavorites({ offerId: id, status: isFavorite ? 0 : 1 }));
   };
 
