@@ -2,13 +2,20 @@ import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
+import { fetchFavorites, logoutAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
   const favorites = useAppSelector((state) => state.favorites);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth && favorites.length === 0) {
+      dispatch(fetchFavorites());
+    }
+  }, [authorizationStatus, dispatch, favorites]);
 
   const handleLogout = (evt: React.MouseEvent) => {
     evt.preventDefault();
