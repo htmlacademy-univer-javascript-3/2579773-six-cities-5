@@ -12,10 +12,10 @@ const Header = (): JSX.Element => {
   const favorites = useAppSelector((state) => state.favorites);
 
   useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth && favorites.length === 0) {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavorites());
     }
-  }, [authorizationStatus, dispatch, favorites]);
+  }, [authorizationStatus, dispatch]);
 
   const handleLogout = (evt: React.MouseEvent) => {
     evt.preventDefault();

@@ -11,10 +11,8 @@ const FavoritesPage = (): JSX.Element => {
   const favorites = useAppSelector((state) => state.favorites);
 
   useEffect(() => {
-    if (favorites.length === 0) {
-      dispatch(fetchFavorites());
-    }
-  }, [dispatch, favorites]);
+    dispatch(fetchFavorites());
+  }, [dispatch]);
   const favoritesByCity = getFavorites(favorites);
 
   return (
