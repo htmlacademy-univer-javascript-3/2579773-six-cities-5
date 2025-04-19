@@ -1,5 +1,4 @@
 import ReviewList from '../review-list/review-list';
-import { reviews } from '../../mocks/reviews';
 import Map from '../map/map';
 import { useEffect, useState } from 'react';
 import OfferList from '../offer-list/offer-list';
@@ -8,13 +7,14 @@ import CommentForm from '../comment-form/comment-form';
 import Header from '../header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { fetchOfferById } from '../../store/api-actions';
+import { fetchOfferById, fetchReviewsByOfferId } from '../../store/api-actions';
 
 const OfferPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const offers = useAppSelector((state) => state.offers);
   const offer = useAppSelector((state) => state.offer);
+  const reviews = useAppSelector((state) => state.reviews);
 
   const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
   const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
@@ -23,6 +23,7 @@ const OfferPage = (): JSX.Element => {
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferById(id));
+      dispatch(fetchReviewsByOfferId(id));
     }
   }, [id, dispatch]);
 
@@ -122,7 +123,7 @@ const OfferPage = (): JSX.Element => {
             </div>
           </div>
           <section className={'offer__map map'}>
-            <Map city={offers[0].city} offers={filteredOffers} activeOffer={activeOffer} />
+            <Map city={offer.city} offers={filteredOffers} activeOffer={activeOffer} />
           </section>
         </section>
         <div className="container">

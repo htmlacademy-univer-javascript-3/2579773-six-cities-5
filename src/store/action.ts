@@ -3,6 +3,7 @@ import { AuthorizationStatus, CityName, SortingType } from '../const';
 import { OfferPreviewType } from '../types/offer-preview';
 import { UserType } from '../types/user';
 import { OfferType } from '../types/offer';
+import { ReviewType } from '../types/review';
 
 const changeCity = createAction<CityName>('changeCity');
 const fillOffersList = createAction<OfferPreviewType[]>('fillOffersList');
@@ -12,5 +13,6 @@ const requireAuthorization = createAction<AuthorizationStatus>('requireAuthoriza
 const setUser = createAction<UserType>('setUser');
 const getFavoritesOffers = createAction<OfferPreviewType[]>('getFavorites');
 const getOffer = createAction<OfferType>('getOffer');
+const getReviews = createAction<ReviewType[]>('getReviews');
 
-export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers, getOffer};
+export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews};
