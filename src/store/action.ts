@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CityName, SortingType } from '../const';
 import { OfferPreviewType } from '../types/offer-preview';
 import { UserType } from '../types/user';
+import { OfferType } from '../types/offer';
 
 const changeCity = createAction<CityName>('changeCity');
 const fillOffersList = createAction<OfferPreviewType[]>('fillOffersList');
@@ -10,5 +11,6 @@ const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
 const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
 const setUser = createAction<UserType>('setUser');
 const getFavoritesOffers = createAction<OfferPreviewType[]>('getFavorites');
+const getOffer = createAction<OfferType>('getOffer');
 
-export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers};
+export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers, getOffer};
