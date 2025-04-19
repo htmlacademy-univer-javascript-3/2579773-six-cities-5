@@ -3,7 +3,7 @@ import { APIRoute, AuthorizationStatus } from '../const';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { OfferPreviewType } from '../types/offer-preview';
-import { fillOffersList, requireAuthorization, setUser } from './action';
+import { fillOffersList, requireAuthorization, setUser, getFavoritesOffers } from './action';
 import { setOffersLoadingStatus } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { AuthType } from '../types/auth';
@@ -17,6 +17,22 @@ const fetchOffers = createAsyncThunk<void, undefined, {dispatch: AppDispatch; st
     dispatch(setOffersLoadingStatus(false));
     dispatch(fillOffersList(data));
   },
+);
+
+const fetchFavorites = createAsyncThunk<void, undefined, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
+  'getFavoritesOffers',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<OfferPreviewType[]>(APIRoute.Favorite);
+    dispatch(getFavoritesOffers(data));
+  },
+);
+
+const updateFavorites = createAsyncThunk<OfferPreviewType, {offerId: string; status: number}, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
+  'updateFavorities',
+  async ({ offerId, status }, { extra: api }) => {
+    const { data } = await api.post<OfferPreviewType>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    return data;
+  }
 );
 
 const checkAuthAction = createAsyncThunk<void, undefined, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
@@ -51,4 +67,4 @@ const logoutAction = createAsyncThunk<void, undefined, {dispatch: AppDispatch; s
   },
 );
 
-export {fetchOffers, checkAuthAction, loginAction, logoutAction};
+export {fetchOffers, checkAuthAction, loginAction, logoutAction, updateFavorites, fetchFavorites};

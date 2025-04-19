@@ -2,12 +2,20 @@ import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
+import { fetchFavorites, logoutAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
+  const favorites = useAppSelector((state) => state.favorites);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavorites());
+    }
+  }, [authorizationStatus, dispatch]);
 
   const handleLogout = (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -27,7 +35,7 @@ const Header = (): JSX.Element => {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper" />
                       <span className="header__user-name user__name">{user?.email}</span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">

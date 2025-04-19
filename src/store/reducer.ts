@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser } from './action';
+import { changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers } from './action';
 import { CityName, SortingType, AuthorizationStatus } from '../const';
 import { OfferPreviewType } from '../types/offer-preview';
 import { UserType } from '../types/user';
+import { updateFavorites } from './api-actions';
 
 type StateType = {
   city: CityName;
@@ -11,6 +12,7 @@ type StateType = {
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   user: UserType | null;
+  favorites: OfferPreviewType[];
 };
 
 const initialState: StateType = {
@@ -20,6 +22,7 @@ const initialState: StateType = {
   isOffersLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
+  favorites: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -41,6 +44,21 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(getFavoritesOffers, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(updateFavorites.fulfilled, (state, action) => {
+      const updatedOffer = action.payload;
+      const offerIndex = state.offers.findIndex((offer) => offer.id === updatedOffer.id);
+      if (offerIndex !== -1) {
+        state.offers[offerIndex] = updatedOffer;
+      }
+      if (updatedOffer.isFavorite) {
+        state.favorites.push(updatedOffer);
+      } else {
+        state.favorites = state.favorites.filter((fav) => fav.id !== updatedOffer.id);
+      }
     });
 });
 
