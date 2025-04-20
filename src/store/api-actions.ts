@@ -27,11 +27,20 @@ const fetchFavorites = createAsyncThunk<void, undefined, {dispatch: AppDispatch;
   },
 );
 
-const updateFavorites = createAsyncThunk<OfferPreviewType, {offerId: string; status: number}, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
+const updateFavorites = createAsyncThunk<void, {offerId: string; status: number}, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
   'updateFavorities',
-  async ({ offerId, status }, { extra: api }) => {
+  async ({ offerId, status }, { dispatch, getState, extra: api }) => {
     const { data } = await api.post<OfferPreviewType>(`${APIRoute.Favorite}/${offerId}/${status}`);
-    return data;
+    const offers = getState().offers.map((offer) =>
+      offer.id === data.id ? data : offer
+    );
+    dispatch(fillOffersList(offers));
+
+    const favorites = getState().favorites;
+    const updatedFavorites = data.isFavorite
+      ? [...favorites, data]
+      : favorites.filter((fav) => fav.id !== data.id);
+    dispatch(getFavoritesOffers(updatedFavorites));
   }
 );
 
