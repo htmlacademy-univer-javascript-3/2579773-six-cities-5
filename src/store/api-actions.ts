@@ -3,7 +3,7 @@ import { APIRoute, AuthorizationStatus } from '../const';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { OfferPreviewType } from '../types/offer-preview';
-import { fillOffersList, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews } from './action';
+import { fillOffersList, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews, getNearbyOffers } from './action';
 import { setOffersLoadingStatus } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { AuthType } from '../types/auth';
@@ -94,4 +94,12 @@ const fetchReviewsByOfferId = createAsyncThunk<void, string, { dispatch: AppDisp
   }
 );
 
-export {fetchOffers, checkAuthAction, loginAction, logoutAction, updateFavorites, fetchFavorites, fetchOfferById, fetchReviewsByOfferId};
+const fetchNearbyOffersById = createAsyncThunk<void, string, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>(
+  'fetchNearbyOffersById',
+  async (offerId, { dispatch, extra: api }) => {
+    const { data } = await api.get<OfferPreviewType[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+    dispatch(getNearbyOffers(data));
+  }
+);
+
+export {fetchOffers, checkAuthAction, loginAction, logoutAction, updateFavorites, fetchFavorites, fetchOfferById, fetchReviewsByOfferId, fetchNearbyOffersById};

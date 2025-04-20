@@ -1,35 +1,49 @@
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import OfferList from '../offer-list/offer-list';
 import { OfferPreviewType } from '../../types/offer-preview';
 import CommentForm from '../comment-form/comment-form';
 import Header from '../header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { fetchOfferById, fetchReviewsByOfferId } from '../../store/api-actions';
+import { fetchNearbyOffersById, fetchOfferById, fetchReviewsByOfferId } from '../../store/api-actions';
+import { getRatingWidth } from '../../utils';
 
 const OfferPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
-  const offers = useAppSelector((state) => state.offers);
   const offer = useAppSelector((state) => state.offer);
   const reviews = useAppSelector((state) => state.reviews);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
-  const [activeOffer, setActiveOffer] = useState<OfferPreviewType['id'] | null>(null);
   const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
-  const filteredOffers = offers.slice(0, 3);
+  const filteredOffers = nearbyOffers.slice(0, 3);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferById(id));
       dispatch(fetchReviewsByOfferId(id));
+      dispatch(fetchNearbyOffersById(id));
     }
   }, [id, dispatch]);
 
   if (!offer) {
     return <p>Loading...</p>;
   }
+
+  const mapOffers: OfferPreviewType[] = [...filteredOffers, {
+    id: offer.id,
+    title: offer.title,
+    type: offer.type,
+    price: offer.price,
+    city: offer.city,
+    location: offer.location,
+    isFavorite: offer.isFavorite,
+    isPremium: offer.isPremium,
+    previewImage: offer.images[0],
+    rating: offer.rating,
+  }];
 
   return(
     <div className="page">
@@ -66,7 +80,7 @@ const OfferPage = (): JSX.Element => {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
+                  <span style={{width: getRatingWidth(offer.rating)}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{offer.rating}</span>
@@ -123,13 +137,13 @@ const OfferPage = (): JSX.Element => {
             </div>
           </div>
           <section className={'offer__map map'}>
-            <Map city={offer.city} offers={filteredOffers} activeOffer={activeOffer} />
+            <Map city={offer.city} offers={mapOffers} activeOffer={offer.id} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferList offers={filteredOffers} setActiveOffer={setActiveOffer} block="near" />
+            <OfferList offers={filteredOffers} block="near" />
           </section>
         </div>
       </main>

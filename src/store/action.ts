@@ -14,5 +14,6 @@ const setUser = createAction<UserType>('setUser');
 const getFavoritesOffers = createAction<OfferPreviewType[]>('getFavorites');
 const getOffer = createAction<OfferType>('getOffer');
 const getReviews = createAction<ReviewType[]>('getReviews');
+const getNearbyOffers = createAction<OfferPreviewType[]>('getNearbyOffers');
 
-export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews};
+export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews, getNearbyOffers};

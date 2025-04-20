@@ -3,7 +3,7 @@ import { OfferPreviewType } from '../../types/offer-preview';
 
 type OfferListProps = {
   offers: OfferPreviewType[];
-  setActiveOffer:(id: OfferPreviewType['id'] | null) => void;
+  setActiveOffer?: (id: OfferPreviewType['id'] | null) => void;
   block: string;
 }
 
