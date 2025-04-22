@@ -9,5 +9,6 @@ const setSortOption = createAction<SortingType>('sort');
 const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
 const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
 const setUser = createAction<UserType>('setUser');
+const getFavoritesOffers = createAction<OfferPreviewType[]>('getFavorites');
 
-export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser};
+export {changeCity, fillOffersList, setSortOption, setOffersLoadingStatus, requireAuthorization, setUser, getFavoritesOffers};

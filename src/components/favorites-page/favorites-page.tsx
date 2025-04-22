@@ -2,49 +2,48 @@ import Card from '../card/card';
 import { getFavorites } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
-import { fillOffersList } from '../../store/action';
-import {offers as mockOffers} from '../../mocks/offers';
 import Header from '../header/header';
+import { fetchFavorites } from '../../store/api-actions';
+import FavoritesEmptyPage from '../favorites-empty/favorites-empty';
 
 const FavoritesPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
+  const favorites = useAppSelector((state) => state.favorites);
 
   useEffect(() => {
-    if (offers.length === 0) {
-      dispatch(fillOffersList(mockOffers));
-    }
-  }, [dispatch, offers]);
+    dispatch(fetchFavorites());
+  }, [dispatch]);
+  const favoritesByCity = getFavorites(favorites);
 
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  const favoritesByCity = getFavorites(favoriteOffers);
   return (
     <div className="page">
-      <Header />
+      <Header favoritesCount={favorites.length} />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {Object.entries(favoritesByCity).map(([city, cityOffers]) => (
-                <li className="favorites__locations-items" key={city}>
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>{city}</span>
-                      </a>
+          {favorites.length === 0 ? <FavoritesEmptyPage /> :
+
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <ul className="favorites__list">
+                {Object.entries(favoritesByCity).map(([city, cityOffers]) => (
+                  <li className="favorites__locations-items" key={city}>
+                    <div className="favorites__locations locations locations--current">
+                      <div className="locations__item">
+                        <a className="locations__item-link" href="#">
+                          <span>{city}</span>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div className="favorites__places">
-                    {cityOffers.map((offer) => (
-                      <Card key={offer.id} offer={offer} block="favorites" />
-                    ))}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
+                    <div className="favorites__places">
+                      {cityOffers.map((offer) => (
+                        <Card key={offer.id} offer={offer} block="favorites" />
+                      ))}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>}
         </div>
       </main>
       <footer className="footer container">

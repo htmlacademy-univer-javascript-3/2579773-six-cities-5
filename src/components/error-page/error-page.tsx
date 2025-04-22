@@ -2,7 +2,7 @@ import Header from '../header/header';
 
 const ErrorPage = (): JSX.Element => (
   <div className="page page--favorites-empty">
-    <Header />
+    <Header favoritesCount={0} />
 
     <main className="page__main page__main--error">
       <div className="page__error-container container">
