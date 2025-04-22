@@ -15,7 +15,7 @@ const OfferPage = (): JSX.Element => {
 
   return(
     <div className="page">
-      <Header />
+      <Header favoritesCount={0} />
 
       <main className="page__main page__main--offer">
         <section className="offer">

@@ -42,7 +42,7 @@ const MainPage = ({cities}: MainPageProps): JSX.Element => {
 
   return (
     <div className="page page--gray page--main">
-      <Header/>
+      <Header favoritesCount={offers.filter((offer) => offer.isFavorite).length}/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

@@ -2,20 +2,16 @@ import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavorites, logoutAction } from '../../store/api-actions';
-import { useEffect } from 'react';
+import { logoutAction } from '../../store/api-actions';
 
-const Header = (): JSX.Element => {
+type HeaderProps = {
+  favoritesCount: number;
+};
+
+const Header = ({favoritesCount}: HeaderProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
-  const favorites = useAppSelector((state) => state.favorites);
-
-  useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavorites());
-    }
-  }, [authorizationStatus, dispatch]);
 
   const handleLogout = (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -35,7 +31,7 @@ const Header = (): JSX.Element => {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper" />
                       <span className="header__user-name user__name">{user?.email}</span>
-                      <span className="header__favorite-count">{favorites.length}</span>
+                      <span className="header__favorite-count">{favoritesCount}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
