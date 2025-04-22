@@ -102,4 +102,25 @@ const fetchNearbyOffersById = createAsyncThunk<void, string, { dispatch: AppDisp
   }
 );
 
+const updateFavorites = createAsyncThunk<void, {offerId: string; status: number}, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
+  'updateFavorities',
+  async ({ offerId, status }, { dispatch, getState, extra: api }) => {
+    const { data } = await api.post<OfferPreviewType>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    const offers = getState().offers.map((offer) =>
+      offer.id === data.id ? data : offer
+    );
+    dispatch(fillOffersList(offers));
+
+    const favorites = getState().favorites;
+    const updatedFavorites = data.isFavorite
+      ? [...favorites, data]
+      : favorites.filter((fav) => fav.id !== data.id);
+    dispatch(getFavoritesOffers(updatedFavorites));
+
+    if (getState().offer?.id === data.id) {
+      dispatch(fetchOfferById(data.id));
+    }
+  }
+);
+
 export {fetchOffers, checkAuthAction, loginAction, logoutAction, updateFavorites, fetchFavorites, fetchOfferById, fetchReviewsByOfferId, fetchNearbyOffersById};

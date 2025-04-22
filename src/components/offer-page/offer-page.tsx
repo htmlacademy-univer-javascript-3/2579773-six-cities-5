@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { fetchNearbyOffersById, fetchOfferById, fetchReviewsByOfferId } from '../../store/api-actions';
 import { getRatingWidth } from '../../utils';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 const OfferPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -71,12 +72,7 @@ const OfferPage = (): JSX.Element => {
                 <h1 className="offer__name">
                   {offer.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteButton offerId={offer.id} isFavorite={offer.isFavorite} block="offer"/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
