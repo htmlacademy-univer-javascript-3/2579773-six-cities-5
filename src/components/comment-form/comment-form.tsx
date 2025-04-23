@@ -1,4 +1,6 @@
-import { useState, ChangeEvent, Fragment, useMemo } from 'react';
+import { useState, ChangeEvent, Fragment, useMemo, FormEvent } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { sendReview } from '../../store/api-actions';
 
 const ratingTitle: { [key: string]: string } = {
   '5': 'perfect',
@@ -8,7 +10,13 @@ const ratingTitle: { [key: string]: string } = {
   '1': 'terribly'
 };
 
-const CommentForm = (): JSX.Element => {
+type CommentFormProps = {
+  offerId: string;
+};
+
+const CommentForm = ({offerId}: CommentFormProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   const [form, setForm] = useState({
     review: '',
     rating: ''
@@ -23,8 +31,23 @@ const CommentForm = (): JSX.Element => {
     }));
   }
 
+  function handleSubmit(evt: FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+    if (!isValid) {
+      return;
+    }
+
+    dispatch(sendReview({
+      offerId,
+      comment: {
+        comment: form.review,
+        rating: Number(form.rating),
+      }
+    }));
+  }
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Object.entries(ratingTitle)
