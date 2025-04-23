@@ -3,13 +3,14 @@ import { APIRoute, AuthorizationStatus } from '../const';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { OfferPreviewType } from '../types/offer-preview';
-import { fillOffersList, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews, getNearbyOffers } from './action';
+import { fillOffersList, requireAuthorization, setUser, getFavoritesOffers, getOffer, getReviews, getNearbyOffers, addReview } from './action';
 import { setOffersLoadingStatus } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { AuthType } from '../types/auth';
 import { UserType } from '../types/user';
 import { OfferType } from '../types/offer';
 import { ReviewType } from '../types/review';
+import { NewReviewType } from '../types/new-review';
 
 const fetchOffers = createAsyncThunk<void, undefined, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
   'fetchOffers',
@@ -103,7 +104,23 @@ const updateFavorites = createAsyncThunk<void, {offerId: string; status: number}
     if (getState().offer?.id === data.id) {
       dispatch(fetchOfferById(data.id));
     }
+
+    const nearby = getState().nearbyOffers;
+    const updatedNearby = nearby.map((offer) =>
+      offer.id === data.id ? data : offer
+    );
+    dispatch(getNearbyOffers(updatedNearby));
   }
 );
 
-export {fetchOffers, checkAuthAction, loginAction, logoutAction, updateFavorites, fetchFavorites, fetchOfferById, fetchReviewsByOfferId, fetchNearbyOffersById};
+const sendReview = createAsyncThunk<ReviewType,{offerId:string; comment: NewReviewType}, {dispatch: AppDispatch; state: State; extra: AxiosInstance}>(
+  'sendReview',
+  async ({ offerId, comment }, {dispatch, extra: api }) => {
+    const {data} = await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, comment);
+    dispatch(addReview(data));
+    dispatch(fetchReviewsByOfferId(offerId));
+    return data;
+  }
+);
+
+export {fetchOffers, checkAuthAction, loginAction, logoutAction, updateFavorites, fetchFavorites, fetchOfferById, fetchReviewsByOfferId, fetchNearbyOffersById, sendReview};
