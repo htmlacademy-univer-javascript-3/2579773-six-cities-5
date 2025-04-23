@@ -7,7 +7,7 @@ import CommentForm from '../comment-form/comment-form';
 import Header from '../header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { fetchNearbyOffersById, fetchOfferById, fetchReviewsByOfferId } from '../../store/api-actions';
+import { fetchFavorites, fetchNearbyOffersById, fetchOfferById, fetchReviewsByOfferId } from '../../store/api-actions';
 import { getRatingWidth } from '../../utils';
 import FavoriteButton from '../favorite-button/favorite-button';
 
@@ -17,6 +17,7 @@ const OfferPage = (): JSX.Element => {
   const offer = useAppSelector((state) => state.offer);
   const reviews = useAppSelector((state) => state.reviews);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const favorites = useAppSelector((state) => state.favorites);
 
   const sortedReviews = [...reviews].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
   const filteredOffers = nearbyOffers.slice(0, 3);
@@ -26,6 +27,7 @@ const OfferPage = (): JSX.Element => {
       dispatch(fetchOfferById(id));
       dispatch(fetchReviewsByOfferId(id));
       dispatch(fetchNearbyOffersById(id));
+      dispatch(fetchFavorites());
     }
   }, [id, dispatch]);
 
@@ -48,7 +50,7 @@ const OfferPage = (): JSX.Element => {
 
   return(
     <div className="page">
-      <Header favoritesCount={0} />
+      <Header favoritesCount={favorites.length} />
 
       <main className="page__main page__main--offer">
         <section className="offer">
